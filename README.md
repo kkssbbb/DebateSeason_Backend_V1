@@ -1,169 +1,148 @@
-# 토론철 백엔드 (DebateSeason Backend)
+# 토론철 (DebateSeason) - 실시간 토론 커뮤니티 백엔드
 
-## ✅ 목차
+<br/>
+<p align="center">
+  <h3 align="center">토론철 백엔드 서버</h3>
 
-[1. 프로젝트 소개](#-프로젝트-소개)  
-[2. 기술 스택](#-기술-스택)  
-[3. 아키텍처](#-아키텍처)  
-[4. 프로젝트 구조](#-프로젝트-구조)  
-[5. 주요 기능](#-주요-기능)   
-[6. 시작하기](#-시작하기)  
-[7. 환경 설정](#-환경-설정)  
-[8. API 문서](#-api-문서)  
-[9. CI/CD](#-CI/CD)  
-[10. 팀원 소개](#-팀원-소개)
+  <p align="center">
+    다양한 사회적 이슈에 대해 실시간으로 토론하는 커뮤니티 서비스의 백엔드 서버입니다.
 
-## 📋 프로젝트 소개
+</p>
 
-토론철(DebateSeason)은 다양한 커뮤니티의 사용자들이 모여 여러 주제에 대해 실시간 채팅을 통해 토론을 할 수 있는 플랫폼입니다. 토론철은 “결국 대화를 통해 서로를 이해하고, 갈등을 해결할 수 있다”는
-신념으로 서비스를 만들고 있습니다.
+## 프로젝트 소개
 
-## 🛠 기술 스택
+**토론철**은 사용자들이 다양한 사회적, 시사적 주제에 대해 자신의 의견을 나누고 실시간으로 토론할 수 있는 모바일 커뮤니티 플랫폼입니다. 이 저장소는 토론철 서비스의 모든 서버 사이드 로직을 담당하는 백엔드 API 서버입니다.
 
-<img src="https://img.shields.io/badge/Language-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/java-%23ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"><img src="https://img.shields.io/badge/17-515151?style=for-the-badge">
-</br>
-<img src="https://img.shields.io/badge/Framework-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/3.3.5-515151?style=for-the-badge">
-</br>
-<img src="https://img.shields.io/badge/Database-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white"><img src="https://img.shields.io/badge/11.4.4-515151?style=for-the-badge">
-</br>
-<img src="https://img.shields.io/badge/ORM-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white"><img src="https://img.shields.io/badge/3.1.0-515151?style=for-the-badge">
-</br>
-<img src="https://img.shields.io/badge/Security-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white"><img src="https://img.shields.io/badge/6.1.0-515151?style=for-the-badge"><img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white"><img src="https://img.shields.io/badge/0.12.3-515151?style=for-the-badge">
-</br>
-<img src="https://img.shields.io/badge/Communication-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/WebSocket-010101?style=for-the-badge&logo=socket.io&logoColor=white"><img src="https://img.shields.io/badge/STOMP-000000?style=for-the-badge"><img src="https://img.shields.io/badge/2.3.3-515151?style=for-the-badge">
-</br>
-<img src="https://img.shields.io/badge/Documentation-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black"><img src="https://img.shields.io/badge/2.2.0-515151?style=for-the-badge">
-</br>
-<img src="https://img.shields.io/badge/Auth-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/OIDC-2671E5?style=for-the-badge&logo=openid&logoColor=white"><img src="https://img.shields.io/badge/Kakao_&_Apple-515151?style=for-the-badge">
-</br>
-<img src="https://img.shields.io/badge/Build-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"><img src="https://img.shields.io/badge/8.4-515151?style=for-the-badge">
-</br>
-<img src="https://img.shields.io/badge/Container-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"><img src="https://img.shields.io/badge/24.0.5-515151?style=for-the-badge">
+단순한 기능 구현을 넘어, 서비스의 지속적인 성장과 변화에 유연하게 대응할 수 있도록 **유지보수성과 확장성이 높은 시스템을 구축하는 것**에 목표를 두었습니다. 이를 위해 도메인 주도 설계(DDD)와 객체지향 원칙을 깊이 있게 고민하고 적용했습니다.
 
-## 🏗 아키텍처
+### 주요 기능 
+*   **실시간 채팅 기반 토론:** WebSocket/STOMP를 활용한 다자간 실시간 토론 채팅 기능
+*   **주제별 토론방:** 다양한 토론 주제(Issue) 생성 및 관리
+*   **사용자 인증/인가:** JWT 기반의 안전한 사용자 인증 및 API 접근 제어
+*   **프로필 및 커뮤니티 관리:** 사용자 정보, 관심 커뮤니티 설정 및 관리
+*   **관리자 기능:** 이슈 등록 등 서비스 운영을 위한 어드민 기능
 
-<img width="1196" alt="Image" src="https://github.com/user-attachments/assets/7d779d6c-6128-4232-bd5c-ed6a6cebb033" />
+### 기술 스택
+*   **Language**: `Java 17`
+*   **Framework**: `Spring Boot 3.x`, `Spring MVC`, `Spring Security`, `Spring Data JPA`
+*   **Real-time Communication**: `WebSocket`, `STOMP`
+*   **Database**: `MariaDB`
+*   **Authentication**: `JWT (JSON Web Token)`
+*   **Build Tool**: `Gradle`
+*   **Testing**: `JUnit5`, `Mockito`
+*   **Etc**: `Swagger (API Docs)` , `Jacoco(테스트 커버리지 측정 라이브러리)`
 
-## 📑 프로젝트 구조
+---
 
-```plaintext
-src/main/java/com/debateseason_backend_v1/
-├── common/             # 공통 모듈 (예외 처리, 응답 객체 등)
-├── config/             # 애플리케이션 설정
-├── domain/             # 도메인별 로직
-│   ├── chat/           # 채팅 관련
-│   ├── chatroom/       # 토론방 관련
-│   ├── issue/          # 이슈 관련
-│   ├── profile/        # 사용자 프로필 관련
-│   └── user/           # 사용자 인증 관련
-├── security/           # 보안 관련 (JWT 등)
-└── DebateSeasonBackendV1Application.java
+## 아키텍처 및 설계 (Architecture & Design)
+
+### 1. 계층형 아키텍처 (Layered Architecture)
+
+프로젝트는 **DDD(도메인 주도 설계)** 사상을 기반으로 관심사를 분리하는 계층형 아키텍처를 채택했습니다. 각 계층은 명확한 책임을 가지며, 이를 통해 코드의 응집도를 높이고 결합도를 낮추어 유연하고 확장 가능한 구조를 구현했습니다.
+
+<img width="363" height="365" alt="스크린샷 2025-07-16 오후 1 13 09" src="https://github.com/user-attachments/assets/affbf0b1-1518-48cc-8f05-0e7a3b69872c" />
+
+
+
+*   **Presentation Layer (API Gateway)**: `Controller`가 위치하며, 클라이언트의 HTTP 요청을 수신하고 응답하는 역할 담당. `WebSocket` 연결 또한 이 계층에서 처리.
+*   **Application Layer (Business Logic & Messaging)**: `Service`가 위치하며, 실제 비즈니스 로직을 처리. 도메인 객체들을 조합하여 사용자의 요청을 수행하고, 트랜잭션을 관리.
+*   **Domain Layer**: 비즈니스의 핵심 규칙과 데이터(Entity, Value Object)를 포함하는 심장부. 시스템의 다른 어떤 계층에도 의존하지 않는 순수한 도메인 모델로 구성.
+*   **Infrastructure Layer (Data Access)**: `Repository` 구현체, 외부 시스템 연동 등 기술적인 세부사항을 담당. `JPA`, 데이터베이스와의 통신 등을 처리.
+
+<br/>
+
+### 2. 도메인 주도 설계로 비즈니스 복잡성 해결
+
+> "항상 더 좋은 구조는 없는지 고민하며 개발합니다."
+
+MVP 개발 이후 기능이 확장되면서 서비스 로직이 비대해지고 복잡성이 증가하는 문제를 마주했습니다. 이를 해결하기 위해, 단순히 데이터를 담는 DTO와 절차적인 서비스 로직의 조합에서 벗어나, **데이터와 관련 행위를 함께 가지는 풍부한 도메인 모델**을 중심으로 시스템을 리팩토링했습니다.
+
+*   **결과**: 핵심 비즈니스 로직이 `Domain Layer`에 모여 응집도가 높아졌습니다. 이로 인해 `Application Layer`(Service)는 도메인 객체들의 흐름을 제어하는 오케스트레이션 역할에 집중할 수 있게 되어, 새로운 비즈니스 요구사항 변경 및 추가 시 수정 범위를 최소화하고 버그 발생 가능성을 줄일 수 있었습니다.
+
+<br/>
+
+### 3. 'Tell, Don't Ask' 원칙을 통한 객체지향 설계
+
+객체의 상태를 묻고 외부에서 로직을 처리하는 대신, 객체에게 메시지를 보내(Tell) 스스로 일하게(Ask) 만드는 'Tell, Don't Ask' 원칙을 적용하여 객체의 자율성과 캡슐화를 극대화했습니다.
+
+예를 들어, 채팅 메시지 신고 기능 구현 시 `ChatService`가 `Chat` 객체의 상태를 일일이 확인하는 대신, `Chat` 객체 스스로가 신고 가능 여부를 판단하고(`guardSelfReport`), 신고된 메시지 내용을 마스킹하도록(`maskReportedMessage`) 책임을 위임했습니다.
+
+```java
+// src/main/java/com/debateseason_backend_v1/domain/chat/domain/model/chat/Chat.java
+
+@Getter
+public class Chat implements ReportTarget {
+    // ... 필드 생략 ...
+
+    // 'Tell, Don't Ask' 원칙 적용: Chat 객체 스스로 신고 정책을 검증
+    public void guardSelfReport(Long reporterId) {
+        if (this.user.isSameUser(reporterId)) {
+            throw new CustomException(ErrorCode.SELF_REPORT_NOT_ALLOWED);
+        }
+    }
+    
+    // 'Tell, Don't Ask' 원칙 적용: Chat 객체 스스로 리포트된 메시지를 생성
+    public Chat maskReportedMessage(Chat chat) {
+        return Chat.builder()
+                .content(chat.getReportedMessageContent()) // 리포트 메시지 내용 마스킹
+                // ... 생략 ...
+                .build();
+    }
+}
 ```
+이러한 설계를 통해 `Chat`과 관련된 비즈니스 규칙의 변경이 발생하더라도 `Chat` 객체 내부로 수정 범위가 한정되어, **코드의 유지보수성과 테스트 용이성을 크게 향상**시킬 수 있었습니다.
 
-## 🚀 주요 기능
+<br/>
 
-### 인증 및 사용자 관리
+### 4. 실시간 통신을 위한 WebSocket & JWT 보안
 
-- OIDC 인증 로그인(Kakao, Apple)
-- JWT 기반 인증
-- 토큰 재발급
-- 사용자 프로필 관리
+다수의 사용자가 참여하는 실시간 토론 기능을 위해 `WebSocket`과 `STOMP` 프로토콜을 사용했습니다. 특히, 안전한 통신을 위해 `JWT` 토큰을 활용한 인증/인가 과정을 `WebSocket` 연결 단계에 통합했습니다.
 
-### 이슈방 (토론 주제)
+1.  클라이언트는 `STOMP` 연결 시 `Authorization` 헤더에 `JWT` 토큰을 담아 서버에 전송합니다.
+2.  서버는 `ChannelInterceptor`를 통해 메시지가 컨트롤러에 도달하기 전에 헤더를 가로챕니다.
+3.  `JwtUtil` 컴포넌트로 토큰의 유효성을 검증하고, 인증된 사용자 정보를 `SecurityContextHolder`에 저장합니다.
+4.  이를 통해 인가된 사용자만이 `WebSocket`을 통해 메시지를 발행(`pub`)하고 구독(`sub`)할 수 있도록 보안을 강화했습니다.
 
-- 이슈 목록 조회
-- 이슈 상세 조회
-- 이슈 즐겨찾기
+## 성장 경험
 
-### 채팅방 (토론 안건)
+*   **기술적인 의사결정 능력**: 프로젝트 초기, 빠른 개발 속도를 위해 `SimpleBroker`를 사용했습니다. 이는 서버 확장 시 메시지 유실의 한계를 가지는 기술 부채가 될 수 있음을 인지하고 있었습니다. 이 경험을 통해 비즈니스 단계에 맞는 기술을 선택하고, 향후 발생할 수 있는 문제(Scale-out)를 예측하며 **전략적인 트레이드오프**를 하는 법을 배웠습니다.
+*   **추상화를 통한 문제 해결**: 도메인 주도 설계를 적용하며 눈에 보이지 않는 비즈니스 로직과 규칙을 `Domain`이라는 모델로 구체화하고 추상화하는 과정을 깊이 있게 경험했습니다. 잘 설계된 도메인 모델이 어떻게 코드의 복잡도를 낮추고 팀의 생산성을 높이는지 체감할 수 있었습니다.
+*   **코드 품질의 중요성**: '동작하는 코드'를 넘어 '읽기 쉽고, 변경이 용이한 코드'의 중요성을 깨달았습니다. 객체지향 원칙과 DDD를 적용하며 코드 품질을 높이는 과정 자체가 장기적으로는 개발 속도를 향상시킨다는 것을 배웠습니다.
 
-- 채팅방 생성
-- 채팅방 상세 조회
-- 찬성/반대 투표 기능
+<br/>
+<br/>
 
-### 실시간 채팅
+## 프로젝트 시작 가이드
 
-- WebSocket/STOMP 기반 실시간 메시지 전송
-- 채팅 메시지 페이지네이션 조회
+### Prerequisites
 
-## 📌 시작하기
+*   Java 17
+*   Gradle 8.x
+*   MariaDB
 
-### 필수 조건
+### Installation
 
-- JDK 17 이상
-- Gradle
-- MariaDB
+1.  Clone the repo
+    ```sh
+    git clone https://github.com/your_github_username/DebateSeason_Backend_V1.git
+    ```
+2.  `application.yml` 설정
+    `src/main/resources/` 경로의 `application-local.yml` 파일을 생성하고 DB, JWT 등의 설정 정보를 입력합니다.
+    ```yaml
+    spring:
 
-### 설치 및 실행
+    
+      datasource:
+        url: jdbc:mariadb://localhost:3306/debateseason
+        username: your_db_username
+        password: your_db_password
+        driver-class-name: org.mariadb.jdbc.Driver
 
-1. 저장소 클론
-   ```bash
-   git clone https://github.com/your-repo/DebateSeason_Backend_V1.git
-   ```
+    # ... 기타 설정
+    ```
+3.  프로젝트 빌드 및 실행
+    ```sh
+    ./gradlew build
+    java -jar build/libs/DebateSeason_Backend_V1-0.0.1-SNAPSHOT.jar
+    ```
 
-2. 환경 설정 파일 생성
-   ```bash
-   cd DebateSeason_Backend_V1/src/main/resources
-   cp application-local.yml application-secret.yml
-   ```
-
-3. `application-secret.yml` 파일을 열어 데이터베이스 정보를 입력하세요. (아래 환경 설정 참고)
-
-
-4. 프로젝트 디렉토리로 이동
-   ```bash
-   cd DebateSeason_Backend_V1
-   ```
-
-5. 애플리케이션 빌드
-   ```bash
-   ./gradlew build
-   ```
-
-4. 애플리케이션 실행
-   ```bash
-   ./gradlew bootRun
-   ```
-
-### 환경 설정
-
-- `application-local.yml`: 로컬 개발 환경
-- `application-dev.yml`: 개발 서버 환경
-- `application-prod.yml`: 프로덕션 환경
-- `application-test.yml`: 테스트 환경
-
-로컬 환경에서 실행하려면 `src/main/resources` 디렉토리에 `application-secret.yml` 파일을 생성하고 다음 설정을 추가해야 합니다.
-
-```yaml
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
-
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/YOUR_DATABASE?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-    username: YOUR_USERNAME
-    password: YOUR_PASSWORD
-```
-
-`YOUR_DATABASE`, `YOUR_USERNAME`, `YOUR_PASSWORD` 부분을 실제 MariaDB 정보로 변경하세요.
-
-## 📃 API 문서
-
-애플리케이션 실행 후 다음 URL에서 Swagger UI를 통해 API 문서를 확인할 수 있습니다.
-
-```
-http://localhost:8080/swagger-ui/index.html#/
-```
-
-## ♾️ CI/CD
-
-GitHub Actions과 AWS를 통해 브랜치에 따라 자동 배포가 진행됩니다.
-
-- 개발 환경: develop 브랜치에 코드가 병합되면, 빌드&테스트 후 개발 서버에 자동 배포
-- 운영 환경: main 브랜치에 코드가 병합되면, 빌드&테스트 후 운영 서버에 자동 배포
-
-## 👥 팀원 소개
-
-팀원 정보는 추후 업데이트 예정입니다.
